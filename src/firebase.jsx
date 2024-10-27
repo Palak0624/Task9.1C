@@ -1,3 +1,4 @@
+// firebase.js
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
@@ -22,31 +23,37 @@ const firebaseConfig = {
   appId: "1:647291470077:web:48e8f07534fab586507e94"
 };
 
+// Initialize Firebase
 initializeApp(firebaseConfig);
 
+// Initialize Google Auth Provider
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
   prompt: "select_account"
 });
 
+// Initialize Firebase Auth
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
+// Initialize Firestore
 export const db = getFirestore();
 
+// Create User Document in Firestore
 export const createUserDocFromAuth = async (userAuth, additionalInformation = {}) => {
   if (!userAuth) return;
 
   const userDocRef = doc(db, 'users', userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
 
+  // If user does not exist, create a new user document
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
 
     try {
       await setDoc(userDocRef, {
-        displayName: displayName || '', 
+        displayName: displayName || '',
         email,
         createdAt,
         ...additionalInformation
@@ -56,27 +63,19 @@ export const createUserDocFromAuth = async (userAuth, additionalInformation = {}
     }
   }
 
-  return userDocRef;
+  return userDocRef; // Return the document reference
 }
 
+// Function to create user with email and password
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
-
-  try {
-    return await createUserWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    console.log('Error signing up with email and password', error.message);
-    return null; 
-  }
+  
+  return await createUserWithEmailAndPassword(auth, email, password);
 }
 
-export const signinAuthUserWithEmailAndPassword = async (email, password) => {
+// Function to sign in user with email and password
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
-
-  try {
-    return await signInWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    console.log('Error signing in with email and password', error.message);
-    return null; 
-  }
+  
+  return await signInWithEmailAndPassword(auth, email, password);
 }
