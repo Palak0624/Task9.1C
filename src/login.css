@@ -1,0 +1,135 @@
+body {
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h4 {
+  font-size: 36px;
+  margin-top: 2rem;
+  margin-bottom: 1.5px;
+  margin-right: 2px;
+  color: #333;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  margin-top: 10%;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+}
+
+form {
+  height: 300px;
+  width: 80%;
+  max-width: 450px;
+  display: inline-block;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 50px;
+  margin-left: 0px;
+  margin-right: auto;
+  background: #f0f2f5;
+}
+
+.area {
+  margin-bottom: 20px;
+  width: 400px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.button {
+  width: 50%;
+  height: 50px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 20px;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 25px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.google-button-content {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user {
+  margin-top: 1rem;
+  font-size: 14px;
+  color: #666;
+}
+
+.user a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.user a:hover {
+  text-decoration: underline;
+}
+
+.message {
+  margin-top: 1rem;
+  font-size: 14px;
+  color: #d9534f;
+}
+
+.isLoggedIn {
+  color: #5cb85c;
+}
