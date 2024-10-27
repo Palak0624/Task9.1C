@@ -1,8 +1,9 @@
+// login.jsx
 import React, { useState } from "react";
 import './login.css';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { signInWithGooglePopup, createUserDocFromAuth } from "./firebase";
 import logo from './logo.png';
 
@@ -10,14 +11,14 @@ function Login() {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, pass);
       setMessage("User logged in successfully");
-      navigate('/profile');
+      setIsLoggedIn(true);
     } catch (error) {
       setMessage(error.message);
     }
@@ -28,7 +29,7 @@ function Login() {
       const { user } = await signInWithGooglePopup();
       const userDocRef = await createUserDocFromAuth(user);
       console.log("User signed in with Google:", user);
-      navigate('/profile');
+      console.log("User Document Reference:", userDocRef); // Optional logging
     } catch (error) {
       console.error("Error signing in with Google:", error);
     }
@@ -63,18 +64,23 @@ function Login() {
           Log In
         </button>
 
+        <br />
+
         <button type="button" className="google" onClick={handleGoogleSignIn}>
           <div className="google-button-content">
             <img src={logo} alt="Your Logo" className="logo" />
             Log in with Google
           </div>
         </button>
-
+        
+        <br />
+        
         <p className="user">
           New User? <Link to="/signup">Sign Up here!</Link>
         </p>
 
         {message && <p>{message}</p>}
+        {isLoggedIn && <p>Login successful!</p>}
       </form>
     </div>
   );
